@@ -1,25 +1,46 @@
 package q5;
 
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class CoarseGrainedListSet implements ListSet {
-// you are free to add members
+  private LinkedList<Integer> list = new LinkedList<>();
+  private ReentrantLock lock = new ReentrantLock();
 	
   public CoarseGrainedListSet() {
 	// implement your constructor here	  
   }
   
   public boolean add(int value) {
-	// implement your add method here	
-    return false;
+      lock.lock();
+      Node n = new Node(value);
+      try {
+          if (list.contains(n.value)) return false;
+          return list.add(n.value);
+      } finally {
+          lock.unlock();
+      }
   }
   
   public boolean remove(int value) {
-	// implement your remove method here	
-    return false;
+      lock.lock();
+      Node n = new Node(value);
+      try {
+          return list.remove(n.value);
+      } finally {
+          lock.unlock();
+      }
   }
   
   public boolean contains(int value) {
-	// implement your contains method here	
-    return false;
+      lock.lock();
+      Node n = new Node(value);
+      try {
+          return list.contains(n.value);
+      } finally {
+          lock.unlock();
+      }
   }
   
   protected class Node {
@@ -29,6 +50,11 @@ public class CoarseGrainedListSet implements ListSet {
           value = x;
           next = null;
       }
+
+      @Override
+      public String toString() {
+          return value.toString();
+      }
   }
 
   /*
@@ -36,6 +62,7 @@ public class CoarseGrainedListSet implements ListSet {
   check simpleTest for more info
   */
   public String toString() {
-    return "";
+      list.sort(Comparator.comparingInt(Integer::intValue));
+      return list.toString().replaceAll("\\s|\\[|\\]","") + ",";
   }
 }
