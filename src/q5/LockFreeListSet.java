@@ -4,9 +4,8 @@ import java.util.Comparator;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 public class LockFreeListSet implements ListSet {
-// you are free to add members
 
-    private ConcurrentSkipListSet<Integer> set = new ConcurrentSkipListSet<>(Comparator.comparingInt(Integer::intValue));
+  private ConcurrentSkipListSet<Integer> set = new ConcurrentSkipListSet<>(Comparator.comparingInt(Integer::intValue));
 	
   public LockFreeListSet() {
       /* No Constructor */
@@ -20,11 +19,11 @@ public class LockFreeListSet implements ListSet {
   }
 	  
   public boolean remove(int value) {
-	return set.remove(value);
+      return set.remove(value);
   }
 	  
   public boolean contains(int value) {
-	return set.contains(value);
+      return set.contains(value);
   }
 	  
   protected class Node {
