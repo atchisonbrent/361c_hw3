@@ -9,7 +9,7 @@ public class LockFreeListSet implements ListSet {
     private ConcurrentSkipListSet<Integer> set = new ConcurrentSkipListSet<>(Comparator.comparingInt(Integer::intValue));
 	
   public LockFreeListSet() {
-    // implement your constructor here	  
+      /* No Constructor */
   }
 	  
   public boolean add(int value) {
