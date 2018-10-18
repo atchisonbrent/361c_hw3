@@ -1,25 +1,30 @@
 package q5;
 
+import java.util.Comparator;
+import java.util.concurrent.ConcurrentSkipListSet;
+
 public class LockFreeListSet implements ListSet {
 // you are free to add members
+
+    private ConcurrentSkipListSet<Integer> set = new ConcurrentSkipListSet<>(Comparator.comparingInt(Integer::intValue));
 	
   public LockFreeListSet() {
     // implement your constructor here	  
   }
 	  
   public boolean add(int value) {
-	// implement your add method here	
-    return false;
+      if (!set.contains(value)) {
+          return set.add(value);
+      }
+      return false;
   }
 	  
   public boolean remove(int value) {
-    // implement your remove method here	
-	return false;
+	return set.remove(value);
   }
 	  
   public boolean contains(int value) {
-	// implement your contains method here	
-	return false;
+	return set.contains(value);
   }
 	  
   protected class Node {
@@ -36,6 +41,6 @@ public class LockFreeListSet implements ListSet {
   check simpleTest for more info
   */
   public String toString() {
-    return "";
+    return set.toString().replaceAll("\\s|\\[|]","") + ",";
   }
 }
