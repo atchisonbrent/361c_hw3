@@ -63,6 +63,6 @@ public class CoarseGrainedListSet implements ListSet {
   */
   public String toString() {
       list.sort(Comparator.comparingInt(Integer::intValue));
-      return list.toString().replaceAll("\\s|\\[|\\]","") + ",";
+      return list.toString().replaceAll("\\s|\\[|]","") + ",";
   }
 }
